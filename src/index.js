@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import GlobalStyle from "./styles/global";
+import { litghTheme } from "./styles/theme";
+
+import Character from "./pages/character/index";
+import Episode from "./pages/episode/index";
+import Location from "./pages/location/index";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    <ThemeProvider theme={litghTheme}>
+      <GlobalStyle />
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+      <BrowserRouter>
+        <Switch>
+          <Route path="/character">
+            <Character />
+          </Route>
+
+          <Route path="/episode">
+            <Episode />
+          </Route>
+
+          <Route path="/location">
+            <Location />
+          </Route>
+
+          <Route path="/">
+            <Character />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
