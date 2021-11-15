@@ -10,6 +10,8 @@ import Character from "./pages/character/index";
 import Episode from "./pages/episode/index";
 import Location from "./pages/location/index";
 
+import Menu from "./components/menu/Menu";
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={litghTheme}>
@@ -33,6 +35,8 @@ ReactDOM.render(
             <Character />
           </Route>
         </Switch>
+
+        <Menu />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
