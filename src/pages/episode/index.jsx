@@ -4,6 +4,7 @@ import EpisodeService from "../../shared/services/episode";
 
 import List from "../../components/list/List";
 import Button from "../../components/buttons/button/Button";
+import FormSearch from "../../components/form-search/FormSearch";
 import CardInfo from "../../components/cards/card-info/CardInfo";
 
 function Episode() {
@@ -22,30 +23,41 @@ function Episode() {
 
     EpisodeService.getAll()
       .then(({ data }) => {
-        console.log(data);
         setEpisode(data.results);
       })
       .finally(() => setloading(false));
   }, []);
 
-  return (
-    <List loading={loading} emptyList={emptyList("xablau")}>
-      {episode.map(({ name, air_date, episode }, i) => (
-        <CardInfo key={i}>
-          <p>
-            <strong>Name:</strong> {name}
-          </p>
-          <p>
-            <strong>Air date:</strong> {air_date}
-          </p>
-          <p>
-            <strong>Episode:</strong> {episode}
-          </p>
+  const submit = (name) => {
+    setloading(true);
+    EpisodeService.getByQuery({ name })
+      .then(({ data }) => {
+        setEpisode(data.results);
+      })
+      .finally(() => setloading(false));
+  };
 
-          <Button>Visualize</Button>
-        </CardInfo>
-      ))}
-    </List>
+  return (
+    <>
+      <FormSearch submit={(search) => submit(search)} />
+      <List loading={loading} emptyList={emptyList("xablau")}>
+        {episode.map(({ name, air_date, episode }, i) => (
+          <CardInfo key={i}>
+            <p>
+              <strong>Name:</strong> {name}
+            </p>
+            <p>
+              <strong>Air date:</strong> {air_date}
+            </p>
+            <p>
+              <strong>Episode:</strong> {episode}
+            </p>
+
+            <Button>Visualize</Button>
+          </CardInfo>
+        ))}
+      </List>
+    </>
   );
 }
 
