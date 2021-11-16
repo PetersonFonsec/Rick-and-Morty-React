@@ -11,11 +11,16 @@ import Episode from "./pages/episode/index";
 import Location from "./pages/location/index";
 
 import Menu from "./components/menu/Menu";
+import FormSearch from "./components/form-search/FormSearch";
+import ButtonTheme from "./components/buttons/button-theme/ButtonTheme";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={litghTheme}>
       <GlobalStyle />
+
+      <ButtonTheme />
+      <FormSearch />
 
       <BrowserRouter>
         <Switch>

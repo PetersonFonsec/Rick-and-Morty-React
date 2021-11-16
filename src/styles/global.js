@@ -1,26 +1,31 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  app-root,
-  body {
-    align-items: center;
-    background: ${({ theme }) => theme.background};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-  }
-
-  html,
-  body {
-    font-family: ${({ theme }) => theme.fontFamily};
-    margin: 0;
-    padding: 0;
-  }
-
   * {
     box-sizing: border-box;
+  }
+    
+  html,
+  body {
+      font-family: ${({ theme }) => theme.fontFamily};
+      margin: 0;
+      padding: 0;
+  }
+    
+  body {
+      align-items: center;
+      background: ${({ theme }) => theme.background};
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+  }
+
+  #root {
+    flex: 1;
+    padding: 16px;
+    width: 100%;
   }
 
   main {
