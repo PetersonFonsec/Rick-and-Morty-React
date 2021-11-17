@@ -40,8 +40,7 @@ function App() {
 
         <Menu />
       </BrowserRouter>
-
-      <ButtonTheme onClick={() => setTheme(!theme)} />
+      <ButtonTheme click={() => setTheme(!theme)} />
     </ThemeProvider>
   );
 }
