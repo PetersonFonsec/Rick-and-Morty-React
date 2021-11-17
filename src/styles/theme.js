@@ -12,8 +12,8 @@ import {
 } from "./variables";
 
 export const litghTheme = {
-  primary: yellow,
-  secondary: blue,
+  primary: blue,
+  secondary: yellow,
   textColor: black,
   textColorContrast: white,
   background: white,
@@ -36,9 +36,8 @@ export const litghTheme = {
 export const darkTheme = {
   ...litghTheme,
 
-  primary: blue,
-  secondary: yellow,
+  primary: yellow,
+  secondary: blue,
   textColor: white,
-  textColorContrast: yellow,
   background: black,
 };
