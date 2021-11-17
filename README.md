@@ -14,7 +14,7 @@ Outras funcionalidades demontrada nesse projeto são
 - Como trabalhar com temas
 - Consumir apis REST`s
 
-O projeto pode ser visualizado nesse [link](http://react-rick-morty.surge.sh)
+O projeto pode ser visualizado nesse [link](http://reactt-rick-morty.surge.sh/)
 
 ## Para rodar o projeto
 
