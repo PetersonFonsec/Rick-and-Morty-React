@@ -33,6 +33,7 @@ export default createGlobalStyle`
   main {
     flex: 1;
     max-width: ${({ theme }) => theme.grid};
+    min-height: 100vh;
     padding: 32px 18px;
     width: 100%;
   }

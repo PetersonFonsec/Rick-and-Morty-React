@@ -13,6 +13,7 @@ function Character() {
   const [characterIndex, setCharacterIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
+  const [search, setSearch] = useState("");
 
   const emptyList = (nameCharacter) => (
     <span>
@@ -33,10 +34,13 @@ function Character() {
 
   const submit = (name) => {
     setLoading(true);
+    setSearch(name);
+
     CharacterService.getByQuery({ name })
       .then(({ data }) => {
         setCharacters(data.results);
       })
+      .catch(() => setCharacters([]))
       .finally(() => setLoading(false));
   };
 
@@ -76,7 +80,7 @@ function Character() {
         </div>
       </Modal>
 
-      <List loading={loading} emptyList={emptyList("xablau")}>
+      <List loading={loading} emptyList={emptyList(search)}>
         {characters.map(({ image, name, status }, i) => (
           <CardCharacter key={i} src={image} description={name}>
             <p>
