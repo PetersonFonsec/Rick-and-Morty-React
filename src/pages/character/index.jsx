@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Modal from "react-modal";
+
 import List from "../../components/list/List";
 import Button from "../../components/buttons/button/Button";
 import FormSearch from "../../components/form-search/FormSearch";
@@ -7,8 +9,10 @@ import CardCharacter from "../../components/cards/card-character/CardCharacter";
 import CharacterService from "../../shared/services/character";
 
 function Character() {
-  const [character, setCharacter] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [characters, setCharacters] = useState([]);
+  const [characterIndex, setCharacterIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const emptyList = (nameCharacter) => (
     <span>
@@ -18,29 +22,62 @@ function Character() {
   );
 
   useEffect(() => {
-    setloading(true);
+    setLoading(true);
 
     CharacterService.getAll()
       .then(({ data }) => {
-        setCharacter(data.results);
+        setCharacters(data.results);
       })
-      .finally(() => setloading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   const submit = (name) => {
-    setloading(true);
+    setLoading(true);
     CharacterService.getByQuery({ name })
       .then(({ data }) => {
-        setCharacter(data.results);
+        setCharacters(data.results);
       })
-      .finally(() => setloading(false));
+      .finally(() => setLoading(false));
+  };
+
+  const openModal = (index) => {
+    setModal(true);
+    setCharacterIndex(index);
   };
 
   return (
-    <>
+    <main>
       <FormSearch submit={(search) => submit(search)} />
+      <Modal isOpen={modal} onRequestClose={() => setModal(false)}>
+        <img
+          alt={characters[characterIndex]?.name}
+          src={characters[characterIndex]?.image}
+          height="300"
+          width="300"
+        />
+        <div class="content">
+          <p>
+            <strong> Name:</strong> {characters[characterIndex]?.name}
+          </p>
+          <p>
+            <strong> Status:</strong> {characters[characterIndex]?.status}
+          </p>
+          <p>
+            <strong> Species:</strong> {characters[characterIndex]?.species}
+          </p>
+          <p>
+            <strong> Type:</strong> {characters[characterIndex]?.type}
+          </p>
+          <p>
+            <strong> Gender:</strong> {characters[characterIndex]?.gender}
+          </p>
+
+          <Button onClick={() => setModal(false)}>Close</Button>
+        </div>
+      </Modal>
+
       <List loading={loading} emptyList={emptyList("xablau")}>
-        {character.map(({ image, name, status }, i) => (
+        {characters.map(({ image, name, status }, i) => (
           <CardCharacter key={i} src={image} description={name}>
             <p>
               <strong>Name:</strong> {name}
@@ -49,11 +86,11 @@ function Character() {
               <strong>status:</strong> {status}
             </p>
 
-            <Button>Visualize</Button>
+            <Button onClick={() => openModal(i)}>Visualize</Button>
           </CardCharacter>
         ))}
       </List>
-    </>
+    </main>
   );
 }
 

@@ -7,7 +7,7 @@ export const Button = styled.button`
   font-size: 14px;
   line-height: 16px;
   padding: 12px 14px;
-  transition: ${({ theme }) => theme.transition} ease-in-out all;
+  transition: ${({ theme }) => theme.transition};
   width: 100%;
 
   &:hover {

@@ -1,0 +1,19 @@
+.ReactModal__Content {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  margin: 0 auto;
+  max-width: 350px;
+  padding: 24px;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.ReactModal__Content img {
+  display: block;
+  width: 100%;
+}
+
+.ReactModal__Content .content {
+  flex: 1;
+}

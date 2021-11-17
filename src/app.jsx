@@ -12,6 +12,7 @@ import Episode from "./pages/episode/index";
 import Location from "./pages/location/index";
 
 import Menu from "./components/menu/Menu";
+import "./index.css";
 
 function App() {
   const [theme, setTheme] = useState(true);

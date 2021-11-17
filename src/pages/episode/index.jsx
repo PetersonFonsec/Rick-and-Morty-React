@@ -38,7 +38,7 @@ function Episode() {
   };
 
   return (
-    <>
+    <main>
       <FormSearch submit={(search) => submit(search)} />
       <List loading={loading} emptyList={emptyList("xablau")}>
         {episode.map(({ name, air_date, episode }, i) => (
@@ -57,7 +57,7 @@ function Episode() {
           </CardInfo>
         ))}
       </List>
-    </>
+    </main>
   );
 }
 

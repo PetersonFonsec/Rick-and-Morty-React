@@ -38,7 +38,7 @@ function Location() {
   };
 
   return (
-    <>
+    <main>
       <FormSearch submit={(search) => submit(search)} />
       <List loading={loading} emptyList={emptyList("xablau")}>
         {location.map(({ name, type, dimension }, i) => (
@@ -56,7 +56,7 @@ function Location() {
           </CardInfo>
         ))}
       </List>
-    </>
+    </main>
   );
 }
 

@@ -23,8 +23,10 @@ export default createGlobalStyle`
   }
 
   #root {
+    align-items: center;
+    display: flex;
     flex: 1;
-    padding: 16px;
+    justify-content: center;
     width: 100%;
   }
 

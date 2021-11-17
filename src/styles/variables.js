@@ -6,7 +6,7 @@ export const white = "#fff";
 
 export const grid = "1400px";
 
-export const transition = "0.3s all";
+export const transition = "0.3s all ease-in-out";
 
 /* Layers */
 export const zIndexSm = 1;
