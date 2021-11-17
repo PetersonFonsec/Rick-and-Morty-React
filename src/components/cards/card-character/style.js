@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background: var(--background);
+  background: ${({ theme }) => theme.background};
   border: 1px solid rgba(158, 158, 158, 0.6);
   border-radius: 4px;
   display: flex;
@@ -15,7 +15,7 @@ export const Thumb = styled.img`
 `;
 
 export const Content = styled.div`
-  color: var(--text-color);
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   flex-direction: column;
   padding: 8px;
