@@ -10,6 +10,7 @@ import FormSearch from "../../components/form-search/FormSearch";
 function Location() {
   const [location, setLocation] = useState([]);
   const [loading, setloading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const emptyList = (nameLlocation) => (
     <span>
@@ -30,17 +31,20 @@ function Location() {
 
   const submit = (name) => {
     setloading(true);
+    setSearch(name);
+
     LocationService.getByQuery({ name })
       .then(({ data }) => {
         setLocation(data.results);
       })
+      .catch(() => setLocation([]))
       .finally(() => setloading(false));
   };
 
   return (
     <main>
       <FormSearch submit={(search) => submit(search)} />
-      <List loading={loading} emptyList={emptyList("xablau")}>
+      <List loading={loading} emptyList={emptyList(search)}>
         {location.map(({ name, type, dimension }, i) => (
           <CardInfo key={i}>
             <p>

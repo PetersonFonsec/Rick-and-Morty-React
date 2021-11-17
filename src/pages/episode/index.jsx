@@ -9,7 +9,8 @@ import CardInfo from "../../components/cards/card-info/CardInfo";
 
 function Episode() {
   const [episode, setEpisode] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
 
   const emptyList = (nameEpisode) => (
     <span>
@@ -19,28 +20,31 @@ function Episode() {
   );
 
   useEffect(() => {
-    setloading(true);
+    setLoading(true);
 
     EpisodeService.getAll()
       .then(({ data }) => {
         setEpisode(data.results);
       })
-      .finally(() => setloading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   const submit = (name) => {
-    setloading(true);
+    setLoading(true);
+    setSearch(name);
+
     EpisodeService.getByQuery({ name })
       .then(({ data }) => {
         setEpisode(data.results);
       })
-      .finally(() => setloading(false));
+      .catch(() => setEpisode([]))
+      .finally(() => setLoading(false));
   };
 
   return (
     <main>
       <FormSearch submit={(search) => submit(search)} />
-      <List loading={loading} emptyList={emptyList("xablau")}>
+      <List loading={loading} emptyList={emptyList(search)}>
         {episode.map(({ name, air_date, episode }, i) => (
           <CardInfo key={i}>
             <p>
