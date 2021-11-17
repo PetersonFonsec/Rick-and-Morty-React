@@ -52,14 +52,18 @@ function Character() {
   return (
     <main>
       <FormSearch submit={(search) => submit(search)} />
-      <Modal isOpen={modal} onRequestClose={() => setModal(false)}>
+      <Modal
+        isOpen={modal}
+        ariaHideApp={false}
+        onRequestClose={() => setModal(false)}
+      >
         <img
           alt={characters[characterIndex]?.name}
           src={characters[characterIndex]?.image}
           height="300"
           width="300"
         />
-        <div class="content">
+        <div className="content">
           <p>
             <strong> Name:</strong> {characters[characterIndex]?.name}
           </p>

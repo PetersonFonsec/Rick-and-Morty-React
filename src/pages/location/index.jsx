@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Modal from "react-modal";
+
 import LocationService from "../../shared/services/location";
 
 import List from "../../components/list/List";
@@ -11,6 +13,9 @@ function Location() {
   const [location, setLocation] = useState([]);
   const [loading, setloading] = useState(false);
   const [search, setSearch] = useState("");
+
+  const [locationIndex, setLocationIndex] = useState(0);
+  const [modal, setModal] = useState(false);
 
   const emptyList = (nameLlocation) => (
     <span>
@@ -41,9 +46,43 @@ function Location() {
       .finally(() => setloading(false));
   };
 
+  const openModal = (index) => {
+    setModal(true);
+    setLocationIndex(index);
+  };
+
   return (
     <main>
       <FormSearch submit={(search) => submit(search)} />
+
+      <Modal
+        isOpen={modal}
+        ariaHideApp={false}
+        onRequestClose={() => setModal(false)}
+      >
+        <div className="content">
+          <p>
+            <strong>Name: </strong>
+            {location[locationIndex]?.name}
+          </p>
+          <p>
+            <strong>Type: </strong>
+            {location[locationIndex]?.type}
+          </p>
+          <p>
+            <strong>Dimension: </strong>
+            {location[locationIndex]?.dimension}
+          </p>
+
+          <p>
+            <strong>Residents: </strong>
+            {location[locationIndex]?.residents?.length}
+          </p>
+
+          <Button onClick={() => setModal(false)}>Close</Button>
+        </div>
+      </Modal>
+
       <List loading={loading} emptyList={emptyList(search)}>
         {location.map(({ name, type, dimension }, i) => (
           <CardInfo key={i}>
@@ -56,7 +95,7 @@ function Location() {
             <p>
               <strong>Dimension:</strong> {dimension}
             </p>
-            <Button>Visualize</Button>
+            <Button onClick={() => openModal(i)}>Visualize</Button>
           </CardInfo>
         ))}
       </List>
